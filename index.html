@@ -12,10 +12,10 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Cooper Hewitt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1A202C;
+            background: linear-gradient(135deg, #3182CE 0%, #2B6CB0 100%);
             min-height: 100vh;
         }
 
@@ -36,6 +36,8 @@
             font-weight: 700;
             margin-bottom: 16px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .header p {
@@ -67,13 +69,15 @@
 
         .card h2 {
             font-size: 1.5rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 12px;
-            color: #333;
+            color: #1A202C;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .card p {
-            color: #666;
+            color: #4A5568;
             margin-bottom: 20px;
             line-height: 1.6;
         }
@@ -108,28 +112,41 @@
         .btn {
             display: inline-block;
             padding: 12px 24px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #3182CE, #2B6CB0);
             color: white;
             text-decoration: none;
             border-radius: 8px;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
         }
 
         .btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 20px rgba(49, 130, 206, 0.3);
         }
 
         .btn-secondary {
             background: transparent;
-            color: #667eea;
-            border: 2px solid #667eea;
+            color: #3182CE;
+            border: 2px solid #3182CE;
         }
 
         .btn-secondary:hover {
-            background: #667eea;
+            background: #3182CE;
             color: white;
+        }
+
+        .btn-accent {
+            background: #18DD89;
+            color: #1A202C;
+        }
+
+        .btn-accent:hover {
+            background: #16c77a;
+            box-shadow: 0 8px 20px rgba(24, 221, 137, 0.3);
         }
 
         .footer {
@@ -182,7 +199,7 @@
                 </div>
                 <h2>Typeform Survey Mockup</h2>
                 <p>Visual demonstration of the 60+ question benchmarking survey that consulting firms will complete. Shows the full user experience including consent flow, progress tracking, and question types.</p>
-                <a href="typeform-mockup.html" class="btn">View Survey Demo</a>
+                <a href="typeform-mockup.html" class="btn btn-accent">View Survey Demo</a>
             </div>
 
             <div class="card">
