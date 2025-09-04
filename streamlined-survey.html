@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAFCG Benchmarking Study - Streamlined Survey (30 Questions)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Cooper Hewitt';
+            src: url('./fonts/CooperHewitt-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #391892;
+            min-height: 100vh;
+            padding: 20px;
+            color: #212C40;
+        }
+
+        .survey-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #F7F7F7;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .survey-header {
+            background: linear-gradient(135deg, #391892, #6A44AE);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .survey-header h1 {
+            font-family: 'Cooper Hewitt', 'Inter', sans-serif;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .survey-header p {
+            font-size: 1em;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .survey-meta {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .progress-section {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 2px solid #D1D2D2;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #D1D2D2;
+            border-radius: 3px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #18DD89, #16c77a);
+            width: 14.3%; /* Start at section 1 of 7 */
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            color: #6A44AE;
+            font-weight: 600;
+        }
+
+        .progress-message {
+            color: #391892;
+            font-weight: 500;
+        }
+
+        .survey-content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #18DD89;
+        }
+
+        .section h2 {
+            font-family: 'Cooper Hewitt', 'Inter', sans-serif;
+            color: #391892;
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-number {
+            background: #18DD89;
+            color: #391892;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 0.9em;
+            color: #6A44AE;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .question-group {
+            margin-bottom: 20px;
+        }
+
+        .question-label {
+            font-weight: 600;
+            color: #212C40;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .required-indicator {
+            color: #E53E3E;
+            font-weight: 700;
+        }
+
+        .question-description {
+            font-size: 0.85em;
+            color: #6A44AE;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .input-field, .select-field {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #D1D2D2;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #18DD89;
+            box-shadow: 0 0 0 3px rgba(24, 221, 137, 0.1);
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .input-grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border: 1px solid #D1D2D2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-item:hover {
+            border-color: #18DD89;
+            background: rgba(24, 221, 137, 0.05);
+        }
+
+        .radio-item input {
+            accent-color: #18DD89;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-item input {
+            accent-color: #18DD89;
+        }
+
+        .range-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .range-output {
+            text-align: center;
+            font-weight: 600;
+            color: #391892;
+            margin-top: 5px;
+        }
+
+        .auto-calc-note {
+            background: rgba(24, 221, 137, 0.1);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            color: #212C40;
+            border-left: 3px solid #18DD89;
+            margin-top: 8px;
+        }
+
+        .submit-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #391892, #6A44AE);
+            margin: 30px -30px -30px -30px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .submit-btn {
+            background: #18DD89;
+            color: #391892;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .submit-btn:hover {
+            background: #16c77a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(24, 221, 137, 0.3);
+        }
+
+        .section-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: 2px solid #391892;
+            background: transparent;
+            color: #391892;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #391892;
+            color: white;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .section-indicator {
+            font-size: 0.9em;
+            color: #6A44AE;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .survey-content {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .input-grid,
+            .input-grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .survey-header {
+                padding: 25px 20px;
+            }
+            
+            .survey-meta {
+                gap: 15px;
+            }
+
+            .section-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <div class="survey-header">
+            <h1>🎯 DAFCG Benchmarking Study</h1>
+            <p>Help create the most comprehensive boutique consulting industry report</p>
+            <div class="survey-meta">
+                <div class="meta-item">📊 30 Questions</div>
+                <div class="meta-item">⏱️ 10-12 Minutes</div>
+                <div class="meta-item">🔒 Confidential</div>
+                <div class="meta-item">📈 Free Report</div>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-text">
+                <span class="section-indicator" id="sectionIndicator">Section 1 of 7: Quick Basics</span>
+                <span class="progress-message" id="progressMessage">Let's start with the fundamentals!</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="survey-content">
+            <!-- Section 1: Quick Basics (5 questions, 1 minute) -->
+            <div class="section" id="section1">
+                <h2><span class="section-number">1</span>Quick Basics</h2>
+                <div class="section-subtitle">Let's start with the fundamentals about your consulting firm</div>
+                
+                <div class="question-group">
+                    <div class="question-label">Company Name <span class="required-indicator">*</span></div>
+                    <input type="text" class="input-field" placeholder="Enter your firm name" required>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Website (optional)</div>
+                    <input type="url" class="input-field" placeholder="https://yourfirm.com">
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Primary Consulting Focus <span class="required-indicator">*</span></div>
+                    <select class="select-field" required>
+                        <option value="">Select your primary focus</option>
+                        <option value="strategy">Strategy & Management Consulting</option>
+                        <option value="technology">Technology & Digital Transformation</option>
+                        <option value="operations">Operations & Process Improvement</option>
+                        <option value="financial">Financial Advisory & M&A</option>
+                        <option value="hr">Human Resources & Change Management</option>
+                        <option value="marketing">Marketing & Brand Strategy</option>
+                        <option value="other">Other (please specify in comments)</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Years in Business <span class="required-indicator">*</span></div>
+                    <select class="select-field" required>
+                        <option value="">Select range</option>
+                        <option value="0-2">0-2 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="6-10">6-10 years</option>
+                        <option value="11-20">11-20 years</option>
+                        <option value="20+">20+ years</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Geographic Markets <span class="required-indicator">*</span></div>
+                    <div class="question-description">Check all that apply</div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="local" name="markets" value="local">
+                            <label for="local">Local/Regional</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="national" name="markets" value="national">
+                            <label for="national">National</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="international" name="markets" value="international">
+                            <label for="international">International</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Team Structure (4 questions, 1 minute) -->
+            <div class="section hidden" id="section2">
+                <h2><span class="section-number">2</span>Team Structure</h2>
+                <div class="section-subtitle">Help us understand your firm's organizational structure</div>
+                
+                <div class="question-group">
+                    <div class="question-label">Total Employees <span class="required-indicator">*</span></div>
+                    <div class="question-description">Include all full-time equivalent employees</div>
+                    <input type="number" class="input-field" placeholder="25" min="1" required>
+                    <div class="auto-calc-note">💡 We'll use this to calculate revenue per employee</div>
+                </div>
+
+                <div class="input-grid-3">
+                    <div class="question-group">
+                        <div class="question-label">Partners/Principals</div>
+                        <input type="number" class="input-field" placeholder="3" min="0">
+                    </div>
+                    <div class="question-group">
+                        <div class="question-label">Senior Consultants</div>
+                        <input type="number" class="input-field" placeholder="8" min="0">
+                    </div>
+                    <div class="question-group">
+                        <div class="question-label">Junior Consultants</div>
+                        <input type="number" class="input-field" placeholder="12" min="0">
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Support Staff (Non-billable)</div>
+                    <div class="question-description">Admin, sales, operations, marketing</div>
+                    <input type="number" class="input-field" placeholder="2" min="0">
+                </div>
+            </div>
+
+            <!-- Section 3: Financial Performance (6 questions, 2 minutes) -->
+            <div class="section hidden" id="section3">
+                <h2><span class="section-number">3</span>Financial Performance</h2>
+                <div class="section-subtitle">Your 2024 financial metrics (all information confidential)</div>
+                
+                <div class="question-group">
+                    <div class="question-label">2024 Annual Revenue <span class="required-indicator">*</span></div>
+                    <div class="question-description">Total revenue for 2024 or best estimate</div>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="revenue" value="under-1m" id="rev1">
+                            <label for="rev1">Under $1M</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="revenue" value="1m-3m" id="rev2">
+                            <label for="rev2">$1M - $3M</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="revenue" value="3m-5m" id="rev3">
+                            <label for="rev3">$3M - $5M</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="revenue" value="5m-10m" id="rev4">
+                            <label for="rev4">$5M - $10M</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="revenue" value="over-10m" id="rev5">
+                            <label for="rev5">Over $10M</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Gross Margin <span class="required-indicator">*</span></div>
+                    <div class="question-description">Revenue minus direct project costs (best estimate)</div>
+                    <input type="range" class="range-slider" min="10" max="80" value="45" oninput="updateRangeOutput(this, 'grossMarginOutput')">
+                    <div class="range-output" id="grossMarginOutput">45%</div>
+                </div>
+
+                <div class="input-grid">
+                    <div class="question-group">
+                        <div class="question-label">Project vs Retainer Revenue</div>
+                        <div class="question-description">% Project-based</div>
+                        <input type="number" class="input-field" placeholder="70" min="0" max="100">
+                    </div>
+                    <div class="question-group">
+                        <div class="question-label">&nbsp;</div>
+                        <div class="question-description">% Retainer-based</div>
+                        <input type="number" class="input-field" placeholder="30" min="0" max="100">
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Average Project Value</div>
+                    <div class="question-description">Typical project size in dollars</div>
+                    <select class="select-field">
+                        <option value="">Select range</option>
+                        <option value="under-25k">Under $25K</option>
+                        <option value="25k-50k">$25K - $50K</option>
+                        <option value="50k-100k">$50K - $100K</option>
+                        <option value="100k-250k">$100K - $250K</option>
+                        <option value="250k-500k">$250K - $500K</option>
+                        <option value="over-500k">Over $500K</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Top Client Concentration</div>
+                    <div class="question-description">What % of revenue comes from your largest client?</div>
+                    <input type="range" class="range-slider" min="5" max="80" value="25" oninput="updateRangeOutput(this, 'concentrationOutput')">
+                    <div class="range-output" id="concentrationOutput">25%</div>
+                </div>
+            </div>
+
+            <!-- Section 4: Billing & Utilization (5 questions, 2 minutes) -->
+            <div class="section hidden" id="section4">
+                <h2><span class="section-number">4</span>Billing & Utilization</h2>
+                <div class="section-subtitle">Pricing structure and team productivity metrics</div>
+                
+                <div class="input-grid-3">
+                    <div class="question-group">
+                        <div class="question-label">Partner Rate ($/hour)</div>
+                        <input type="number" class="input-field" placeholder="450" min="0">
+                    </div>
+                    <div class="question-group">
+                        <div class="question-label">Senior Rate ($/hour)</div>
+                        <input type="number" class="input-field" placeholder="275" min="0">
+                    </div>
+                    <div class="question-group">
+                        <div class="question-label">Junior Rate ($/hour)</div>
+                        <input type="number" class="input-field" placeholder="175" min="0">
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Average Team Utilization <span class="required-indicator">*</span></div>
+                    <div class="question-description">What % of available time is billable across your team?</div>
+                    <input type="range" class="range-slider" min="30" max="95" value="75" oninput="updateRangeOutput(this, 'utilizationOutput')" required>
+                    <div class="range-output" id="utilizationOutput">75%</div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Typical Project Duration</div>
+                    <div class="question-description">Average length of your projects</div>
+                    <select class="select-field">
+                        <option value="">Select duration</option>
+                        <option value="under-2weeks">Under 2 weeks</option>
+                        <option value="2-4weeks">2-4 weeks</option>
+                        <option value="1-3months">1-3 months</option>
+                        <option value="3-6months">3-6 months</option>
+                        <option value="over-6months">Over 6 months</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Pricing Models Used</div>
+                    <div class="question-description">Check all that apply</div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="hourly" name="pricing" value="hourly">
+                            <label for="hourly">Hourly Billing</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="fixed" name="pricing" value="fixed">
+                            <label for="fixed">Fixed Fee Projects</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="retainer" name="pricing" value="retainer">
+                            <label for="retainer">Monthly Retainers</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="value-based" name="pricing" value="value">
+                            <label for="value-based">Value-Based Pricing</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Client Metrics (4 questions, 1 minute) -->
+            <div class="section hidden" id="section5">
+                <h2><span class="section-number">5</span>Client Metrics</h2>
+                <div class="section-subtitle">Your client portfolio and business development performance</div>
+                
+                <div class="input-grid">
+                    <div class="question-group">
+                        <div class="question-label">Active Clients <span class="required-indicator">*</span></div>
+                        <input type="number" class="input-field" placeholder="8" min="1" required>
+                    </div>
+                    <div class="question-group">
+                        <div class="question-label">Client Retention Rate</div>
+                        <div class="question-description">Annual retention %</div>
+                        <input type="number" class="input-field" placeholder="85" min="0" max="100">
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Proposal Win Rate</div>
+                    <div class="question-description">What % of your proposals result in signed contracts?</div>
+                    <input type="range" class="range-slider" min="10" max="90" value="60" oninput="updateRangeOutput(this, 'winRateOutput')">
+                    <div class="range-output" id="winRateOutput">60%</div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Primary Lead Source <span class="required-indicator">*</span></div>
+                    <div class="question-description">Your most effective source of new clients</div>
+                    <select class="select-field" required>
+                        <option value="">Select primary source</option>
+                        <option value="referrals">Client Referrals</option>
+                        <option value="network">Professional Network</option>
+                        <option value="linkedin">LinkedIn/Social Media</option>
+                        <option value="content">Content Marketing</option>
+                        <option value="partnerships">Partner Channels</option>
+                        <option value="events">Speaking/Events</option>
+                        <option value="cold-outreach">Cold Outreach</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 6: Operations (3 questions, 1 minute) -->
+            <div class="section hidden" id="section6">
+                <h2><span class="section-number">6</span>Operations</h2>
+                <div class="section-subtitle">Operational efficiency and team management</div>
+                
+                <div class="question-group">
+                    <div class="question-label">Annual Employee Turnover</div>
+                    <div class="question-description">Voluntary + involuntary departures as % of total team</div>
+                    <select class="select-field">
+                        <option value="">Select range</option>
+                        <option value="0-10">0-10%</option>
+                        <option value="11-20">11-20%</option>
+                        <option value="21-30">21-30%</option>
+                        <option value="31-50">31-50%</option>
+                        <option value="over-50">Over 50%</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Primary Project Management Tool</div>
+                    <select class="select-field">
+                        <option value="">Select tool</option>
+                        <option value="monday">Monday.com</option>
+                        <option value="asana">Asana</option>
+                        <option value="clickup">ClickUp</option>
+                        <option value="notion">Notion</option>
+                        <option value="smartsheet">Smartsheet</option>
+                        <option value="excel">Excel/Sheets</option>
+                        <option value="custom">Custom Solution</option>
+                        <option value="none">No Formal System</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Remote Work Policy <span class="required-indicator">*</span></div>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="remote" value="office" id="office" required>
+                            <label for="office">Primarily Office-Based</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="remote" value="hybrid" id="hybrid">
+                            <label for="hybrid">Hybrid (Office + Remote)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="remote" value="remote" id="remote">
+                            <label for="remote">Primarily Remote</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Strategic Outlook (3 questions, 2 minutes) -->
+            <div class="section hidden" id="section7">
+                <h2><span class="section-number">7</span>Strategic Outlook</h2>
+                <div class="section-subtitle">Your growth plans and industry perspective</div>
+                
+                <div class="question-group">
+                    <div class="question-label">Primary Growth Challenge <span class="required-indicator">*</span></div>
+                    <div class="question-description">Select your biggest challenge for growth</div>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="challenge" value="talent" id="talent" required>
+                            <label for="talent">Finding Qualified Talent</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="challenge" value="pipeline" id="pipeline">
+                            <label for="pipeline">Maintaining Consistent Pipeline</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="challenge" value="capacity" id="capacity">
+                            <label for="capacity">Managing Capacity & Utilization</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="challenge" value="pricing" id="pricing">
+                            <label for="pricing">Pricing & Profitability</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="challenge" value="competition" id="competition">
+                            <label for="competition">Market Competition</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">2025 Revenue Growth Target</div>
+                    <div class="question-description">Expected revenue growth for 2025</div>
+                    <select class="select-field">
+                        <option value="">Select target</option>
+                        <option value="0-10">0-10%</option>
+                        <option value="11-25">11-25%</option>
+                        <option value="26-50">26-50%</option>
+                        <option value="51-100">51-100%</option>
+                        <option value="over-100">Over 100%</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Results Discussion</div>
+                    <div class="question-description">Would you like a 15-minute call to discuss your results when the report is ready?</div>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="call" value="yes" id="call-yes">
+                            <label for="call-yes">Yes, I'd like a results discussion call</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="call" value="no" id="call-no">
+                            <label for="call-no">No, just send me the report</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information (Final) -->
+            <div class="section hidden" id="section8">
+                <h2><span class="section-number">✓</span>Contact & Completion</h2>
+                <div class="section-subtitle">Final details for report delivery</div>
+                
+                <div class="input-grid">
+                    <div class="question-group">
+                        <div class="question-label">Your Name <span class="required-indicator">*</span></div>
+                        <input type="text" class="input-field" placeholder="John Smith" required>
+                    </div>
+                    <div class="question-group">
+                        <div class="question-label">Title</div>
+                        <input type="text" class="input-field" placeholder="Managing Partner">
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Email Address <span class="required-indicator">*</span></div>
+                    <div class="question-description">Where should we send your personalized benchmarking report?</div>
+                    <input type="email" class="input-field" placeholder="john@yourfirm.com" required>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-label">Additional Comments (Optional)</div>
+                    <div class="question-description">Any context about your firm that would help us provide better benchmarks?</div>
+                    <textarea class="input-field" rows="3" placeholder="e.g., specialized focus areas, unique business model, recent changes..."></textarea>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="section-navigation">
+                <button type="button" class="nav-btn" id="prevBtn" onclick="previousSection()" disabled>← Previous</button>
+                <span class="section-indicator" id="navIndicator">Question 1-5 of 30</span>
+                <button type="button" class="nav-btn" id="nextBtn" onclick="nextSection()">Next →</button>
+            </div>
+
+            <!-- Submit Section -->
+            <div class="submit-section hidden" id="submitSection">
+                <h3 style="color: white; margin-bottom: 15px; font-family: 'Cooper Hewitt', sans-serif;">Ready to Submit Your Responses?</h3>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px;">Thank you for participating! Your personalized benchmarking report will be delivered in December 2025.</p>
+                <button type="submit" class="submit-btn">Submit Survey & Get My Report 📊</button>
+                <p style="color: rgba(255,255,255,0.7); margin-top: 10px; font-size: 0.9em;">Expected delivery: December 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 7;
+        const questionsPerSection = [5, 4, 6, 5, 4, 3, 3]; // Questions in each section
+        
+        const sectionTitles = [
+            "Quick Basics",
+            "Team Structure", 
+            "Financial Performance",
+            "Billing & Utilization",
+            "Client Metrics",
+            "Operations",
+            "Strategic Outlook"
+        ];
+
+        const progressMessages = [
+            "Let's start with the fundamentals!",
+            "Understanding your team structure...",
+            "Your financial performance data helps everyone!",
+            "Pricing and utilization insights coming up...",
+            "How's your client portfolio performing?",
+            "Nearly done! Just operations questions...",
+            "Final questions - you're creating industry value!"
+        ];
+
+        function updateProgress() {
+            const progressPercent = (currentSection / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+            
+            document.getElementById('sectionIndicator').textContent = 
+                `Section ${currentSection} of ${totalSections}: ${sectionTitles[currentSection - 1]}`;
+            
+            document.getElementById('progressMessage').textContent = 
+                progressMessages[currentSection - 1];
+            
+            // Update navigation indicator
+            const startQ = questionsPerSection.slice(0, currentSection - 1).reduce((a, b) => a + b, 0) + 1;
+            const endQ = startQ + questionsPerSection[currentSection - 1] - 1;
+            document.getElementById('navIndicator').textContent = `Questions ${startQ}-${endQ} of 30`;
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections) {
+                document.getElementById(`section${currentSection}`).classList.add('hidden');
+                currentSection++;
+                document.getElementById(`section${currentSection}`).classList.remove('hidden');
+                updateProgress();
+                updateNavButtons();
+            } else {
+                // Show final contact section
+                document.getElementById(`section${currentSection}`).classList.add('hidden');
+                document.getElementById('section8').classList.remove('hidden');
+                document.querySelector('.section-navigation').classList.add('hidden');
+                document.getElementById('submitSection').classList.remove('hidden');
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 1) {
+                if (document.getElementById('section8').classList.contains('hidden') === false) {
+                    // Coming back from contact section
+                    document.getElementById('section8').classList.add('hidden');
+                    document.getElementById('submitSection').classList.add('hidden');
+                    document.querySelector('.section-navigation').classList.remove('hidden');
+                    document.getElementById(`section${currentSection}`).classList.remove('hidden');
+                } else {
+                    document.getElementById(`section${currentSection}`).classList.add('hidden');
+                    currentSection--;
+                    document.getElementById(`section${currentSection}`).classList.remove('hidden');
+                    updateProgress();
+                }
+                updateNavButtons();
+            }
+        }
+
+        function updateNavButtons() {
+            document.getElementById('prevBtn').disabled = (currentSection === 1);
+            document.getElementById('nextBtn').textContent = 
+                (currentSection === totalSections) ? 'Final Details →' : 'Next →';
+        }
+
+        function updateRangeOutput(slider, outputId) {
+            document.getElementById(outputId).textContent = slider.value + '%';
+        }
+
+        // Initialize
+        updateProgress();
+        updateNavButtons();
+    </script>
+</body>
+</html>

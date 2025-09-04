@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         @font-face {
             font-family: 'Cooper Hewitt';
@@ -177,6 +178,19 @@
             text-decoration: underline;
         }
 
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .icon-large {
+            width: 24px;
+            height: 24px;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 40px 16px;
@@ -227,12 +241,32 @@
 
             <div class="card">
                 <div class="card-meta">
-                    <span>Interactive Demo</span>
-                    <span class="status-badge status-demo">Mockup</span>
+                    <span>Survey Prep</span>
+                    <span class="status-badge status-live">Interactive</span>
                 </div>
-                <h2>Complete Survey Experience</h2>
-                <p>Single-page view of all 60+ benchmarking questions with DAFCG branding. Shows complete participant experience including consent flow, all question sections, and submission process.</p>
-                <a href="typeform-mockup.html" class="btn btn-accent">View Complete Survey</a>
+                <h2>Survey Preparation Checklist</h2>
+                <p>Interactive checklist to help participants gather documents before starting the survey. Reduces completion time from 20+ to 10-12 minutes by ensuring they have the right information ready.</p>
+                <a href="survey-prep-checklist.html" class="btn btn-accent">View Prep Checklist</a>
+            </div>
+
+            <div class="card">
+                <div class="card-meta">
+                    <span>Streamlined Survey</span>
+                    <span class="status-badge status-live">Optimized</span>
+                </div>
+                <h2>30-Question Survey (NEW)</h2>
+                <p>Redesigned survey focusing on essential metrics firms already track. Features smart progress tracking, auto-calculations, and section-by-section navigation for better completion rates.</p>
+                <a href="streamlined-survey.html" class="btn btn-accent">View New Survey</a>
+            </div>
+
+            <div class="card">
+                <div class="card-meta">
+                    <span>Original Demo</span>
+                    <span class="status-badge status-demo">Reference</span>
+                </div>
+                <h2>60+ Question Survey (Original)</h2>
+                <p>Original comprehensive survey design with all sections on one page. Useful for comparison with the new streamlined approach and understanding the full scope of data collection.</p>
+                <a href="typeform-mockup.html" class="btn btn-secondary">View Original Survey</a>
             </div>
 
             <div class="card">
@@ -281,5 +315,10 @@
             <p>Updated: September 2025</p>
         </div>
     </div>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>

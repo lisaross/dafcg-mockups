@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAFCG Benchmarking Study - Preparation Checklist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Cooper Hewitt';
+            src: url('./fonts/CooperHewitt-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #391892;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #212C40;
+        }
+
+        .prep-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #F7F7F7;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .prep-header {
+            background: linear-gradient(135deg, #391892, #6A44AE);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .prep-header h1 {
+            font-family: 'Cooper Hewitt', 'Inter', sans-serif;
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .prep-header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .time-estimate {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        .time-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .prep-content {
+            padding: 40px;
+        }
+
+        .prep-section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #18DD89;
+        }
+
+        .section-title {
+            font-family: 'Cooper Hewitt', 'Inter', sans-serif;
+            color: #391892;
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            background: #18DD89;
+            color: #391892;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #F7F7F7;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox {
+            min-width: 24px;
+            height: 24px;
+            border: 2px solid #D1D2D2;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2px;
+        }
+
+        .checkbox.checked {
+            background: #18DD89;
+            border-color: #18DD89;
+            color: white;
+        }
+
+        .checkbox:hover {
+            border-color: #18DD89;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #391892;
+            margin-bottom: 5px;
+            font-size: 1.05em;
+        }
+
+        .item-description {
+            color: #6A44AE;
+            font-size: 0.9em;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .item-note {
+            background: rgba(24, 221, 137, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8em;
+            color: #212C40;
+            border-left: 3px solid #18DD89;
+        }
+
+        .progress-tracker {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #D1D2D2;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #18DD89, #16c77a);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-weight: 600;
+            color: #391892;
+            margin-bottom: 10px;
+        }
+
+        .progress-detail {
+            font-size: 0.9em;
+            color: #6A44AE;
+        }
+
+        .action-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #391892, #6A44AE);
+            margin: 40px -40px -40px -40px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .ready-status {
+            color: white;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .start-survey-btn {
+            background: #18DD89;
+            color: #391892;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .start-survey-btn:hover {
+            background: #16c77a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(24, 221, 137, 0.3);
+        }
+
+        .start-survey-btn:disabled {
+            background: #A6B0B2;
+            color: #6A44AE;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .help-note {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9em;
+            margin-top: 15px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .prep-content {
+                padding: 20px;
+            }
+            
+            .prep-section {
+                padding: 20px;
+            }
+            
+            .prep-header {
+                padding: 30px 20px;
+            }
+            
+            .prep-header h1 {
+                font-size: 1.8em;
+            }
+            
+            .time-estimate {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="prep-container">
+        <div class="prep-header">
+            <h1>📋 Survey Preparation Checklist</h1>
+            <p>Before starting the DAFCG Benchmarking Study survey, please gather these documents and information. This will make your experience much smoother!</p>
+            <div class="time-estimate">
+                <div class="time-item">📊 5 Min Prep</div>
+                <div class="time-item">⏱️ 10 Min Survey</div>
+                <div class="time-item">🎁 Valuable Report</div>
+            </div>
+        </div>
+
+        <div class="prep-content">
+            <div class="progress-tracker">
+                <div class="progress-text">Preparation Progress</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-detail" id="progressDetail">0 of 8 items completed</div>
+            </div>
+
+            <!-- Essential Documents -->
+            <div class="prep-section">
+                <div class="section-title">
+                    <div class="section-icon">📄</div>
+                    Essential Documents
+                </div>
+                <ul class="checklist">
+                    <li class="checklist-item">
+                        <div class="checkbox" onclick="toggleCheck(this)"></div>
+                        <div class="item-content">
+                            <div class="item-title">2024 Profit & Loss Statement</div>
+                            <div class="item-description">Your most recent P&L or revenue report showing total annual revenue and major expense categories</div>
+                            <div class="item-note">💡 If you don't have a formal P&L, a simple revenue summary works fine</div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox" onclick="toggleCheck(this)"></div>
+                        <div class="item-content">
+                            <div class="item-title">Employee Roster or Org Chart</div>
+                            <div class="item-description">Current team structure showing partners, consultants, and support staff</div>
+                            <div class="item-note">💡 A simple headcount by role is sufficient</div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox" onclick="toggleCheck(this)"></div>
+                        <div class="item-content">
+                            <div class="item-title">Billing Rate Information</div>
+                            <div class="item-description">Standard hourly rates for different consultant levels (Partner, Senior, Junior)</div>
+                            <div class="item-note">💡 Average or typical rates are fine - we need ranges, not exact figures</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Helpful Information -->
+            <div class="prep-section">
+                <div class="section-title">
+                    <div class="section-icon">📈</div>
+                    Helpful Information (if available)
+                </div>
+                <ul class="checklist">
+                    <li class="checklist-item">
+                        <div class="checkbox" onclick="toggleCheck(this)"></div>
+                        <div class="item-content">
+                            <div class="item-title">Client List with Project Values</div>
+                            <div class="item-description">Recent client projects with approximate values (can anonymize client names)</div>
+                            <div class="item-note">💡 Helps us calculate average project size and client concentration</div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox" onclick="toggleCheck(this)"></div>
+                        <div class="item-content">
+                            <div class="item-title">Utilization or Time Tracking Data</div>
+                            <div class="item-description">Recent utilization report or billable hours data</div>
+                            <div class="item-note">💡 If unavailable, we'll ask for your best estimate</div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox" onclick="toggleCheck(this)"></div>
+                        <div class="item-content">
+                            <div class="item-title">Sales Pipeline or CRM Data</div>
+                            <div class="item-description">Information about win rates, sales cycle length, or proposal success</div>
+                            <div class="item-note">💡 Even rough estimates help build industry benchmarks</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Quick Reference -->
+            <div class="prep-section">
+                <div class="section-title">
+                    <div class="section-icon">🎯</div>
+                    Quick Reference Numbers
+                </div>
+                <ul class="checklist">
+                    <li class="checklist-item">
+                        <div class="checkbox" onclick="toggleCheck(this)"></div>
+                        <div class="item-content">
+                            <div class="item-title">Key Business Metrics</div>
+                            <div class="item-description">Have these approximate numbers ready: client retention rate, employee turnover, growth targets</div>
+                            <div class="item-note">💡 Best estimates are perfectly acceptable for these strategic metrics</div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox" onclick="toggleCheck(this)"></div>
+                        <div class="item-content">
+                            <div class="item-title">Contact Information</div>
+                            <div class="item-description">Primary contact details for follow-up and report delivery</div>
+                            <div class="item-note">💡 We'll send your personalized benchmarking report to this contact</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="action-section">
+                <div class="ready-status" id="readyStatus">Gather your documents above, then start the survey!</div>
+                <a href="typeform-mockup.html" class="start-survey-btn" id="startBtn" style="pointer-events: none; opacity: 0.6;">
+                    Start Survey (Complete checklist first)
+                </a>
+                <div class="help-note">
+                    📞 Need help? Email us at <strong>study@dafcg.com</strong> or schedule a brief prep call.<br>
+                    🔒 All data is confidential and used only for aggregate industry insights.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let checkedCount = 0;
+        const totalItems = 8;
+
+        function toggleCheck(checkbox) {
+            if (checkbox.classList.contains('checked')) {
+                checkbox.classList.remove('checked');
+                checkbox.innerHTML = '';
+                checkedCount--;
+            } else {
+                checkbox.classList.add('checked');
+                checkbox.innerHTML = '✓';
+                checkedCount++;
+            }
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const percentage = (checkedCount / totalItems) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressDetail').textContent = `${checkedCount} of ${totalItems} items completed`;
+            
+            const startBtn = document.getElementById('startBtn');
+            const readyStatus = document.getElementById('readyStatus');
+            
+            if (checkedCount >= 6) {
+                startBtn.style.pointerEvents = 'auto';
+                startBtn.style.opacity = '1';
+                startBtn.textContent = 'Start Survey - Ready to Go! 🚀';
+                readyStatus.textContent = 'Great! You\'re ready to start the survey.';
+            } else if (checkedCount >= 3) {
+                startBtn.style.pointerEvents = 'auto';
+                startBtn.style.opacity = '0.8';
+                startBtn.textContent = 'Start Survey (Minimum Requirements Met)';
+                readyStatus.textContent = 'You can start now, but gathering more documents improves accuracy.';
+            } else {
+                startBtn.style.pointerEvents = 'none';
+                startBtn.style.opacity = '0.6';
+                startBtn.textContent = 'Start Survey (Complete checklist first)';
+                readyStatus.textContent = 'Please gather the essential documents above first.';
+            }
+        }
+    </script>
+</body>
+</html>
