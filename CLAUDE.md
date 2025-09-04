@@ -104,3 +104,7 @@ This mockups directory is part of the larger DAFCG Benchmarking Study project. F
 - **Business Context**: `../docs/business/` - Study requirements and criteria  
 - **Technical Docs**: `../docs/technical/` - Architecture and setup guides
 - **Live Deployment**: https://benchmark-2026-landing.pages.dev/
+
+## Design Guidelines: 
+
+- no gradients, lucide icons only, no emojis, no colored borders on cards, 10px border-radius on all cards

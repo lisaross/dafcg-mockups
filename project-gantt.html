@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAFCG Benchmarking Project - Timeline & Gantt Chart</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,7 +35,7 @@
             max-width: 1600px;
             margin: 0 auto;
             background: #F7F7F7;
-            border-radius: 30px;
+            border-radius: 10px;
             padding: 40px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
         }
@@ -42,7 +43,7 @@
         .header {
             text-align: center;
             margin-bottom: 50px;
-            border-bottom: 3px solid #18DD89;
+            border-bottom: 3px solid transparent;
             padding-bottom: 30px;
         }
         
@@ -74,8 +75,8 @@
             flex-direction: column;
             align-items: center;
             padding: 15px 25px;
-            background: linear-gradient(135deg, #39189215, #6A44AE15);
-            border-radius: 15px;
+            background: #391892;
+            border-radius: 10px;
         }
 
         .meta-label {
@@ -96,21 +97,21 @@
         .gantt-container {
             margin-top: 40px;
             overflow-x: auto;
-            border-radius: 15px;
+            border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         
         .gantt-chart {
             min-width: 1200px;
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
         }
         
         .timeline-header {
             display: grid;
             grid-template-columns: 300px repeat(24, 1fr);
-            background: linear-gradient(135deg, #391892, #6A44AE);
+            background: #391892;
             color: white;
             padding: 15px 0;
             font-weight: 600;
@@ -157,7 +158,7 @@
         .phase-label {
             padding: 20px;
             background: rgba(255, 255, 255, 0.8);
-            border-right: 2px solid #D1D2D2;
+            border-right: 2px solid transparent;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -195,7 +196,7 @@
             height: 30px;
             top: 50%;
             transform: translateY(-50%);
-            border-radius: 15px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             padding: 0 10px;
@@ -213,20 +214,20 @@
         }
         
         .phase-complete {
-            background: linear-gradient(135deg, #18DD89, #16c77a);
+            background: #18DD89;
         }
         
         .phase-ready {
-            background: linear-gradient(135deg, #391892, #6A44AE);
+            background: #391892;
         }
         
         .phase-planned {
-            background: linear-gradient(135deg, #A6B0B2, #D1D2D2);
+            background: #A6B0B2;
             color: #212C40;
         }
         
         .phase-continuous {
-            background: linear-gradient(135deg, #6A44AE, #391892);
+            background: #6A44AE;
             opacity: 0.8;
         }
         
@@ -269,7 +270,7 @@
             margin-top: 30px;
             padding: 25px;
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
         
@@ -282,13 +283,13 @@
         .legend-bar {
             width: 30px;
             height: 15px;
-            border-radius: 8px;
+            border-radius: 10px;
         }
         
-        .legend-complete { background: linear-gradient(135deg, #18DD89, #16c77a); }
-        .legend-ready { background: linear-gradient(135deg, #391892, #6A44AE); }
-        .legend-planned { background: linear-gradient(135deg, #A6B0B2, #D1D2D2); }
-        .legend-continuous { background: linear-gradient(135deg, #6A44AE, #391892); }
+        .legend-complete { background: #18DD89; }
+        .legend-ready { background: #391892; }
+        .legend-planned { background: #A6B0B2; }
+        .legend-continuous { background: #6A44AE; }
         
         .legend-text {
             font-size: 0.9em;
@@ -306,10 +307,10 @@
         .stat-card {
             background: white;
             padding: 25px;
-            border-radius: 15px;
+            border-radius: 10px;
             text-align: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid #18DD89;
+            border-left: 4px solid transparent;
         }
         
         .stat-value {
@@ -347,12 +348,28 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        .icon-large {
+            width: 20px;
+            height: 20px;
+        }
+        .icon-xlarge {
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📅 DAFCG Project Timeline & Gantt Chart</h1>
+            <h1><i data-lucide="calendar" class="icon icon-large"></i>DAFCG Project Timeline & Gantt Chart</h1>
             <div class="subtitle">Complete project roadmap from Foundation through Report Sales</div>
             <div class="project-meta">
                 <div class="meta-item">
@@ -748,5 +765,9 @@
             </div>
         </div>
     </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAFCG Benchmarking Study - Technology Stack & Process Flow</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,7 +35,7 @@
             max-width: 1500px;
             margin: 0 auto;
             background: #F7F7F7;
-            border-radius: 30px;
+            border-radius: 10px;
             padding: 40px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
         }
@@ -42,7 +43,7 @@
         .header {
             text-align: center;
             margin-bottom: 50px;
-            border-bottom: 3px solid #18DD89;
+            border-bottom: 3px solid transparent;
             padding-bottom: 30px;
         }
         
@@ -78,9 +79,9 @@
             margin-bottom: 30px;
             text-align: center;
             padding: 15px 30px;
-            background: linear-gradient(135deg, #18DD8915, #39189215);
-            border-radius: 15px;
-            border: 2px solid #18DD89;
+            background: #18DD89;
+            border-radius: 10px;
+            border: 2px solid transparent;
         }
         
         .flow-diagram {
@@ -95,10 +96,10 @@
         
         .tech-component {
             background: white;
-            border-radius: 20px;
+            border-radius: 10px;
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 3px solid #D1D2D2;
+            border: 3px solid transparent;
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
@@ -109,15 +110,15 @@
         .tech-component:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-color: #18DD89;
+            border-color: transparent;
         }
         
         .tech-icon {
             width: 60px;
             height: 60px;
             margin: 0 auto 15px;
-            background: linear-gradient(135deg, #391892, #6A44AE);
-            border-radius: 15px;
+            background: #391892;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -145,7 +146,7 @@
             color: #1A2431;
             background: #F7F7F7;
             padding: 10px;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-top: 10px;
         }
         
@@ -170,23 +171,23 @@
         }
         
         .data-layer {
-            background: linear-gradient(135deg, #18DD89, #16c77a);
+            background: #18DD89;
         }
         
         .frontend-layer {
-            background: linear-gradient(135deg, #391892, #6A44AE);
+            background: #391892;
         }
         
         .backend-layer {
-            background: linear-gradient(135deg, #6A44AE, #391892);
+            background: #6A44AE;
         }
         
         .integration-layer {
-            background: linear-gradient(135deg, #212C40, #1A2431);
+            background: #212C40;
         }
         
         .security-layer {
-            background: linear-gradient(135deg, #E53E3E, #C53030);
+            background: #E53E3E;
         }
         
         .process-steps {
@@ -198,10 +199,10 @@
         
         .process-step {
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             padding: 25px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid #18DD89;
+            border-left: 5px solid transparent;
             position: relative;
         }
         
@@ -245,16 +246,16 @@
             background: #6A44AE;
             color: white;
             padding: 4px 10px;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 0.75em;
             font-weight: 600;
         }
         
         .compliance-section {
-            background: linear-gradient(135deg, #18DD8915, #39189215);
+            background: #18DD89;
             padding: 30px;
-            border-radius: 20px;
-            border: 2px solid #18DD89;
+            border-radius: 10px;
+            border: 2px solid transparent;
             margin-top: 40px;
         }
         
@@ -276,7 +277,7 @@
         .compliance-item {
             background: white;
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 10px;
             text-align: center;
             box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
         }
@@ -323,21 +324,37 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        .icon-large {
+            width: 20px;
+            height: 20px;
+        }
+        .icon-xlarge {
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>⚙️ Technology Stack & Process Architecture</h1>
+            <h1><i data-lucide="settings" class="icon icon-large"></i>Technology Stack & Process Architecture</h1>
             <div class="subtitle">Complete technical infrastructure for the DAFCG Benchmarking Study</div>
         </div>
         
         <!-- Data Flow Section -->
         <div class="flow-section">
-            <div class="section-title">📊 Data Flow Architecture</div>
+            <div class="section-title"><i data-lucide="bar-chart-3" class="icon"></i>Data Flow Architecture</div>
             <div class="flow-diagram">
                 <div class="tech-component">
-                    <div class="tech-icon data-layer">📋</div>
+                    <div class="tech-icon data-layer"><i data-lucide="clipboard-list" class="icon icon-large"></i></div>
                     <div class="tech-name">Typeform</div>
                     <div class="tech-description">Survey Data Collection</div>
                     <div class="tech-details">60+ question survey with validation, conditional logic, and progress tracking</div>
@@ -346,7 +363,7 @@
                 <div class="flow-arrow" data-label="Real-time Sync">→</div>
                 
                 <div class="tech-component">
-                    <div class="tech-icon backend-layer">☁️</div>
+                    <div class="tech-icon backend-layer"><i data-lucide="cloud" class="icon icon-large"></i></div>
                     <div class="tech-name">Google Cloud</div>
                     <div class="tech-description">Cloud Infrastructure</div>
                     <div class="tech-details">Cloud Storage, Pub/Sub messaging, Cloud Functions for processing</div>
@@ -355,7 +372,7 @@
                 <div class="flow-arrow" data-label="ETL Pipeline">→</div>
                 
                 <div class="tech-component">
-                    <div class="tech-icon data-layer">🗄️</div>
+                    <div class="tech-icon data-layer"><i data-lucide="database" class="icon icon-large"></i></div>
                     <div class="tech-name">BigQuery</div>
                     <div class="tech-description">Data Warehouse</div>
                     <div class="tech-details">Structured data storage, analytics, and benchmarking calculations</div>
@@ -364,7 +381,7 @@
                 <div class="flow-arrow" data-label="Analysis">→</div>
                 
                 <div class="tech-component">
-                    <div class="tech-icon frontend-layer">📈</div>
+                    <div class="tech-icon frontend-layer"><i data-lucide="trending-up" class="icon icon-large"></i></div>
                     <div class="tech-name">Reports & Analytics</div>
                     <div class="tech-description">Insights Generation</div>
                     <div class="tech-details">Automated report generation, peer comparisons, industry benchmarks</div>
@@ -374,24 +391,24 @@
         
         <!-- Frontend Stack -->
         <div class="flow-section">
-            <div class="section-title">🎨 Frontend & User Experience</div>
+            <div class="section-title"><i data-lucide="palette" class="icon"></i>Frontend & User Experience</div>
             <div class="flow-diagram">
                 <div class="tech-component">
-                    <div class="tech-icon frontend-layer">⚛️</div>
+                    <div class="tech-icon frontend-layer"><i data-lucide="code" class="icon icon-large"></i></div>
                     <div class="tech-name">React + TypeScript</div>
                     <div class="tech-description">Landing Page</div>
                     <div class="tech-details">Type-safe, component-based UI with modern React patterns</div>
                 </div>
                 
                 <div class="tech-component">
-                    <div class="tech-icon frontend-layer">🎨</div>
+                    <div class="tech-icon frontend-layer"><i data-lucide="palette" class="icon icon-large"></i></div>
                     <div class="tech-name">Tailwind CSS</div>
                     <div class="tech-description">Styling System</div>
                     <div class="tech-details">DAFCG brand colors, responsive design, component styling</div>
                 </div>
                 
                 <div class="tech-component">
-                    <div class="tech-icon frontend-layer">⚡</div>
+                    <div class="tech-icon frontend-layer"><i data-lucide="zap" class="icon icon-large"></i></div>
                     <div class="tech-name">Vite + Cloudflare</div>
                     <div class="tech-description">Build & Deploy</div>
                     <div class="tech-details">Fast builds, global CDN distribution, automatic deployments</div>
@@ -401,24 +418,24 @@
         
         <!-- Backend Infrastructure -->
         <div class="flow-section">
-            <div class="section-title">🔧 Backend & Processing</div>
+            <div class="section-title"><i data-lucide="wrench" class="icon"></i>Backend & Processing</div>
             <div class="flow-diagram">
                 <div class="tech-component">
-                    <div class="tech-icon backend-layer">🐍</div>
+                    <div class="tech-icon backend-layer"><i data-lucide="code" class="icon icon-large"></i></div>
                     <div class="tech-name">Python + Polars</div>
                     <div class="tech-description">Data Processing</div>
                     <div class="tech-details">High-performance data analysis, qualification scoring, normalization</div>
                 </div>
                 
                 <div class="tech-component">
-                    <div class="tech-icon backend-layer">📊</div>
+                    <div class="tech-icon backend-layer"><i data-lucide="bar-chart-3" class="icon icon-large"></i></div>
                     <div class="tech-name">Jupyter + Analytics</div>
                     <div class="tech-description">Analysis Environment</div>
                     <div class="tech-details">Interactive analysis, visualization, statistical modeling</div>
                 </div>
                 
                 <div class="tech-component">
-                    <div class="tech-icon backend-layer">🔄</div>
+                    <div class="tech-icon backend-layer"><i data-lucide="refresh-cw" class="icon icon-large"></i></div>
                     <div class="tech-name">Cloud Functions</div>
                     <div class="tech-description">Serverless Processing</div>
                     <div class="tech-details">Event-driven data processing, automated workflows, scalable execution</div>
@@ -428,24 +445,24 @@
         
         <!-- Integration Layer -->
         <div class="flow-section">
-            <div class="section-title">🔗 Integration & Automation</div>
+            <div class="section-title"><i data-lucide="link" class="icon"></i>Integration & Automation</div>
             <div class="flow-diagram">
                 <div class="tech-component">
-                    <div class="tech-icon integration-layer">📧</div>
+                    <div class="tech-icon integration-layer"><i data-lucide="mail" class="icon icon-large"></i></div>
                     <div class="tech-name">ActiveCampaign</div>
                     <div class="tech-description">Email Marketing</div>
                     <div class="tech-details">Automated email sequences, participant onboarding, follow-up campaigns</div>
                 </div>
                 
                 <div class="tech-component">
-                    <div class="tech-icon integration-layer">💼</div>
+                    <div class="tech-icon integration-layer"><i data-lucide="briefcase" class="icon icon-large"></i></div>
                     <div class="tech-name">LinkedIn Sales Nav</div>
                     <div class="tech-description">Prospect Outreach</div>
                     <div class="tech-details">Lead qualification, targeted messaging, professional networking</div>
                 </div>
                 
                 <div class="tech-component">
-                    <div class="tech-icon integration-layer">🔧</div>
+                    <div class="tech-icon integration-layer"><i data-lucide="wrench" class="icon icon-large"></i></div>
                     <div class="tech-name">Zapier + APIs</div>
                     <div class="tech-description">Workflow Automation</div>
                     <div class="tech-details">Cross-platform integration, automated data syncing, trigger-based actions</div>
@@ -524,45 +541,49 @@
         
         <!-- Security & Compliance -->
         <div class="compliance-section">
-            <div class="compliance-title">🔒 Security & Compliance Framework</div>
+            <div class="compliance-title"><i data-lucide="lock" class="icon"></i>Security & Compliance Framework</div>
             <div class="compliance-items">
                 <div class="compliance-item">
-                    <div class="compliance-icon">🛡️</div>
+                    <div class="compliance-icon"><i data-lucide="shield" class="icon icon-large"></i></div>
                     <div class="compliance-name">Data Encryption</div>
                     <div class="compliance-desc">End-to-end encryption for all data transmission and storage</div>
                 </div>
                 
                 <div class="compliance-item">
-                    <div class="compliance-icon">🔐</div>
+                    <div class="compliance-icon"><i data-lucide="lock" class="icon icon-large"></i></div>
                     <div class="compliance-name">Access Control</div>
                     <div class="compliance-desc">Role-based permissions and multi-factor authentication</div>
                 </div>
                 
                 <div class="compliance-item">
-                    <div class="compliance-icon">📋</div>
+                    <div class="compliance-icon"><i data-lucide="clipboard-list" class="icon icon-large"></i></div>
                     <div class="compliance-name">GDPR Compliance</div>
                     <div class="compliance-desc">Privacy-by-design, consent management, data portability</div>
                 </div>
                 
                 <div class="compliance-item">
-                    <div class="compliance-icon">🔍</div>
+                    <div class="compliance-icon"><i data-lucide="search" class="icon icon-large"></i></div>
                     <div class="compliance-name">Audit Logging</div>
                     <div class="compliance-desc">Comprehensive logging of all data access and modifications</div>
                 </div>
                 
                 <div class="compliance-item">
-                    <div class="compliance-icon">💾</div>
+                    <div class="compliance-icon"><i data-lucide="hard-drive" class="icon icon-large"></i></div>
                     <div class="compliance-name">Data Backup</div>
                     <div class="compliance-desc">Automated backups with point-in-time recovery capabilities</div>
                 </div>
                 
                 <div class="compliance-item">
-                    <div class="compliance-icon">🔄</div>
+                    <div class="compliance-icon"><i data-lucide="refresh-cw" class="icon icon-large"></i></div>
                     <div class="compliance-name">Data Retention</div>
                     <div class="compliance-desc">Defined retention policies and secure data deletion procedures</div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

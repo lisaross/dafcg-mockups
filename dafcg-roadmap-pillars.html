@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         @font-face {
             font-family: 'Cooper Hewitt';
@@ -32,7 +33,7 @@
             max-width: 1400px;
             margin: 0 auto;
             background: #F7F7F7;
-            border-radius: 30px;
+            border-radius: 10px;
             padding: 40px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
         }
@@ -40,8 +41,21 @@
         .header {
             text-align: center;
             margin-bottom: 50px;
-            border-bottom: 3px solid #18DD89;
+            border-bottom: 3px solid transparent;
             padding-bottom: 30px;
+        }
+        
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .icon-large {
+            width: 24px;
+            height: 24px;
         }
         
         h1 {
@@ -66,8 +80,8 @@
             flex-direction: column;
             align-items: center;
             padding: 10px 20px;
-            background: linear-gradient(135deg, #39189215, #6A44AE15);
-            border-radius: 15px;
+            background: rgba(57, 24, 146, 0.08);
+            border-radius: 10px;
         }
         
         .meta-label {
@@ -123,10 +137,10 @@
         }
         
         .pillar-header {
-            background: linear-gradient(135deg, #391892, #6A44AE);
+            background: #391892;
             color: white;
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -154,8 +168,8 @@
         
         .phase-block {
             background: #ffffff;
-            border: 2px solid #D1D2D2;
-            border-radius: 12px;
+            border: 2px solid transparent;
+            border-radius: 10px;
             padding: 15px;
             position: relative;
             transition: all 0.3s ease;
@@ -165,17 +179,17 @@
         .phase-block:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-color: #18DD89;
+            border-color: transparent;
         }
         
         .phase-block.active {
-            background: linear-gradient(135deg, #18DD8915, #6A44AE15);
-            border-color: #18DD89;
+            background: rgba(24, 221, 137, 0.08);
+            border-color: transparent;
         }
         
         .phase-block.completed {
-            background: linear-gradient(135deg, #18DD8910, #39189210);
-            border-color: #18DD89;
+            background: rgba(24, 221, 137, 0.06);
+            border-color: transparent;
             opacity: 0.85;
         }
         
@@ -199,7 +213,7 @@
             background: #391892;
             color: white;
             padding: 3px 8px;
-            border-radius: 6px;
+            border-radius: 10px;
             font-size: 0.75em;
             font-weight: 700;
         }
@@ -222,8 +236,8 @@
         .milestone-markers {
             margin-top: 40px;
             padding: 30px;
-            background: linear-gradient(135deg, #18DD8915, #39189215);
-            border-radius: 15px;
+            background: rgba(24, 221, 137, 0.08);
+            border-radius: 10px;
         }
         
         .milestone-title {
@@ -243,9 +257,9 @@
         .milestone {
             background: white;
             padding: 15px;
-            border-radius: 12px;
+            border-radius: 10px;
             text-align: center;
-            border: 2px solid #18DD89;
+            border: 2px solid transparent;
             position: relative;
         }
         
@@ -268,7 +282,7 @@
             margin-top: 30px;
             padding: 20px;
             background: #F7F7F7;
-            border-radius: 12px;
+            border-radius: 10px;
         }
         
         .legend-item {
@@ -280,23 +294,23 @@
         .legend-box {
             width: 20px;
             height: 20px;
-            border-radius: 5px;
-            border: 2px solid #D1D2D2;
+            border-radius: 10px;
+            border: 2px solid transparent;
         }
         
         .legend-box.completed {
             background: #18DD8920;
-            border-color: #18DD89;
+            border-color: transparent;
         }
         
         .legend-box.active {
             background: #39189220;
-            border-color: #391892;
+            border-color: transparent;
         }
         
         .legend-box.future {
             background: #F7F7F7;
-            border-color: #A6B0B2;
+            border-color: transparent;
         }
         
         @media (max-width: 1200px) {
@@ -330,7 +344,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎯 DAFCG Benchmarking Project Roadmap</h1>
+            <h1><i data-lucide="target" class="icon icon-large"></i>DAFCG Benchmarking Project Roadmap</h1>
             <div class="project-meta">
                 <div class="meta-item">
                     <span class="meta-label">Timeline</span>
@@ -539,7 +553,7 @@
         </div>
         
         <div class="milestone-markers">
-            <div class="milestone-title">🚨 Critical Milestones</div>
+            <div class="milestone-title"><i data-lucide="alert-triangle" class="icon"></i>Critical Milestones</div>
             <div class="milestones-grid">
                 <div class="milestone">
                     <div class="milestone-date">Aug 18</div>
@@ -591,5 +605,10 @@
             </div>
         </div>
     </div>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
