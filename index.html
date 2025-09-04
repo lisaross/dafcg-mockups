@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAFCG Project Mockups & Demos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-live {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-demo {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            margin-top: 60px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>DAFCG Project Mockups</h1>
+            <p>Demonstrations and prototypes for the boutique consulting firm benchmarking study</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-meta">
+                    <span>Interactive Demo</span>
+                    <span class="status-badge status-demo">Mockup</span>
+                </div>
+                <h2>Typeform Survey Mockup</h2>
+                <p>Visual demonstration of the 60+ question benchmarking survey that consulting firms will complete. Shows the full user experience including consent flow, progress tracking, and question types.</p>
+                <a href="typeform-mockup.html" class="btn">View Survey Demo</a>
+            </div>
+
+            <div class="card">
+                <div class="card-meta">
+                    <span>Data Architecture</span>
+                    <span class="status-badge status-live">Documentation</span>
+                </div>
+                <h2>BigQuery Schema Diagram</h2>
+                <p>Entity relationship diagram showing the complete data warehouse structure for participant responses, calculated metrics, and benchmarking analysis.</p>
+                <a href="../docs/technical/bigquery-schema-diagram.md" class="btn btn-secondary">View Schema</a>
+            </div>
+
+            <div class="card">
+                <div class="card-meta">
+                    <span>Coming Soon</span>
+                    <span class="status-badge status-demo">Planned</span>
+                </div>
+                <h2>Landing Page Mockup</h2>
+                <p>Study information page for prospect outreach and participant onboarding. Will include study overview, timeline, and participation benefits.</p>
+                <a href="#" class="btn btn-secondary" onclick="alert('Coming soon!')">Preview Soon</a>
+            </div>
+
+            <div class="card">
+                <div class="card-meta">
+                    <span>Coming Soon</span>
+                    <span class="status-badge status-demo">Planned</span>
+                </div>
+                <h2>Report Dashboard Demo</h2>
+                <p>Interactive dashboard showing how participants will receive their benchmarking results with peer comparisons and industry insights.</p>
+                <a href="#" class="btn btn-secondary" onclick="alert('Coming soon!')">Preview Soon</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Part of the <a href="https://github.com/lisaross/dafcg-benchmark">DAFCG Benchmarking Study</a> project</p>
+            <p>Updated September 2025</p>
+        </div>
+    </div>
+</body>
+</html>
