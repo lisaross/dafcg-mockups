@@ -4,7 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAFCG Benchmarking Project - Roadmap by Pillars</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'Cooper Hewitt';
+            src: url('./fonts/CooperHewitt-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -12,8 +22,8 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #391892;
             min-height: 100vh;
             padding: 40px 20px;
         }
@@ -21,7 +31,7 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.98);
+            background: #F7F7F7;
             border-radius: 30px;
             padding: 40px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
@@ -30,15 +40,16 @@
         .header {
             text-align: center;
             margin-bottom: 50px;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid #18DD89;
             padding-bottom: 30px;
         }
         
         h1 {
+            font-family: 'Cooper Hewitt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-size: 2.5em;
-            color: #2d3748;
+            color: #391892;
             margin-bottom: 15px;
-            font-weight: 800;
+            font-weight: 700;
             letter-spacing: -1px;
         }
         
@@ -55,13 +66,13 @@
             flex-direction: column;
             align-items: center;
             padding: 10px 20px;
-            background: linear-gradient(135deg, #667eea15, #764ba215);
+            background: linear-gradient(135deg, #39189215, #6A44AE15);
             border-radius: 15px;
         }
         
         .meta-label {
             font-size: 0.85em;
-            color: #718096;
+            color: #6A44AE;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -69,7 +80,7 @@
         
         .meta-value {
             font-size: 1.3em;
-            color: #2d3748;
+            color: #391892;
             font-weight: 700;
             margin-top: 5px;
         }
@@ -88,7 +99,7 @@
         }
         
         .month-label {
-            background: #4a5568;
+            background: #391892;
             color: white;
             padding: 10px;
             text-align: center;
@@ -112,14 +123,14 @@
         }
         
         .pillar-header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #391892, #6A44AE);
             color: white;
             padding: 20px;
             border-radius: 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 5px 15px rgba(57, 24, 146, 0.3);
         }
         
         .pillar-number {
@@ -142,8 +153,8 @@
         }
         
         .phase-block {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
+            background: #ffffff;
+            border: 2px solid #D1D2D2;
             border-radius: 12px;
             padding: 15px;
             position: relative;
@@ -154,30 +165,30 @@
         .phase-block:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-color: #667eea;
+            border-color: #18DD89;
         }
         
         .phase-block.active {
-            background: linear-gradient(135deg, #48bb7815, #4299e115);
-            border-color: #48bb78;
+            background: linear-gradient(135deg, #18DD8915, #6A44AE15);
+            border-color: #18DD89;
         }
         
         .phase-block.completed {
-            background: linear-gradient(135deg, #48bb7810, #38a16910);
-            border-color: #38a169;
+            background: linear-gradient(135deg, #18DD8910, #39189210);
+            border-color: #18DD89;
             opacity: 0.85;
         }
         
         .phase-title {
             font-weight: 700;
-            color: #2d3748;
+            color: #212C40;
             margin-bottom: 8px;
             font-size: 0.95em;
         }
         
         .phase-activities {
             font-size: 0.8em;
-            color: #4a5568;
+            color: #1A2431;
             line-height: 1.4;
         }
         
@@ -185,7 +196,7 @@
             position: absolute;
             top: 8px;
             right: 8px;
-            background: #667eea;
+            background: #391892;
             color: white;
             padding: 3px 8px;
             border-radius: 6px;
@@ -194,7 +205,7 @@
         }
         
         .phase-block.completed .phase-metric {
-            background: #48bb78;
+            background: #18DD89;
         }
         
         /* Spanning phases */
@@ -211,14 +222,14 @@
         .milestone-markers {
             margin-top: 40px;
             padding: 30px;
-            background: linear-gradient(135deg, #fbb03015, #ff574915);
+            background: linear-gradient(135deg, #18DD8915, #39189215);
             border-radius: 15px;
         }
         
         .milestone-title {
             font-size: 1.4em;
             font-weight: 700;
-            color: #2d3748;
+            color: #391892;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -234,20 +245,20 @@
             padding: 15px;
             border-radius: 12px;
             text-align: center;
-            border: 2px solid #fed7d7;
+            border: 2px solid #18DD89;
             position: relative;
         }
         
         .milestone-date {
             font-size: 1.1em;
             font-weight: 800;
-            color: #e53e3e;
+            color: #391892;
             margin-bottom: 5px;
         }
         
         .milestone-desc {
             font-size: 0.9em;
-            color: #4a5568;
+            color: #212C40;
         }
         
         .legend {
@@ -256,7 +267,7 @@
             gap: 30px;
             margin-top: 30px;
             padding: 20px;
-            background: #f7fafc;
+            background: #F7F7F7;
             border-radius: 12px;
         }
         
@@ -270,22 +281,22 @@
             width: 20px;
             height: 20px;
             border-radius: 5px;
-            border: 2px solid #e2e8f0;
+            border: 2px solid #D1D2D2;
         }
         
         .legend-box.completed {
-            background: #48bb7820;
-            border-color: #48bb78;
+            background: #18DD8920;
+            border-color: #18DD89;
         }
         
         .legend-box.active {
-            background: #4299e120;
-            border-color: #4299e1;
+            background: #39189220;
+            border-color: #391892;
         }
         
         .legend-box.future {
-            background: #f7fafc;
-            border-color: #cbd5e0;
+            background: #F7F7F7;
+            border-color: #A6B0B2;
         }
         
         @media (max-width: 1200px) {

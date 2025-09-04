@@ -24,7 +24,7 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
-            color: #1A202C;
+            color: #212C40;
             background: #391892;
             min-height: 100vh;
         }
@@ -64,16 +64,18 @@
         }
 
         .card {
-            background: white;
-            border-radius: 12px;
+            background: #F7F7F7;
+            border-radius: 15px;
             padding: 32px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #D1D2D2;
         }
 
         .card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            border-color: #18DD89;
         }
 
         .card h2 {
@@ -81,11 +83,11 @@
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 12px;
-            color: #1A202C;
+            color: #391892;
         }
 
         .card p {
-            color: #4A5568;
+            color: #212C40;
             margin-bottom: 20px;
             line-height: 1.6;
         }
@@ -96,7 +98,8 @@
             align-items: center;
             margin-bottom: 20px;
             font-size: 0.9rem;
-            color: #999;
+            color: #6A44AE;
+            font-weight: 500;
         }
 
         .status-badge {
@@ -108,13 +111,15 @@
         }
 
         .status-live {
-            background: #d4edda;
-            color: #155724;
+            background: #18DD8920;
+            color: #391892;
+            border: 1px solid #18DD89;
         }
 
         .status-demo {
-            background: #fff3cd;
-            color: #856404;
+            background: #6A44AE20;
+            color: #391892;
+            border: 1px solid #6A44AE;
         }
 
         .btn {
@@ -202,6 +207,16 @@
         <div class="grid">
             <div class="card">
                 <div class="card-meta">
+                    <span>Journey Mapping</span>
+                    <span class="status-badge status-live">Interactive</span>
+                </div>
+                <h2>Participant Journey Flowchart</h2>
+                <p>Interactive visual flow showing the complete participant experience from initial outreach through report delivery. Includes conversion rates, touchpoints, and success metrics at each stage.</p>
+                <a href="participant-journey.html" class="btn btn-accent">View Journey Map</a>
+            </div>
+
+            <div class="card">
+                <div class="card-meta">
                     <span>Project Roadmap</span>
                     <span class="status-badge status-live">Live</span>
                 </div>
@@ -215,9 +230,9 @@
                     <span>Interactive Demo</span>
                     <span class="status-badge status-demo">Mockup</span>
                 </div>
-                <h2>Typeform Survey Mockup</h2>
-                <p>Visual demonstration of the 60+ question benchmarking survey that consulting firms will complete. Shows the full user experience including consent flow, progress tracking, and question types.</p>
-                <a href="typeform-mockup.html" class="btn btn-accent">View Survey Demo</a>
+                <h2>Complete Survey Experience</h2>
+                <p>Single-page view of all 60+ benchmarking questions with DAFCG branding. Shows complete participant experience including consent flow, all question sections, and submission process.</p>
+                <a href="typeform-mockup.html" class="btn btn-accent">View Complete Survey</a>
             </div>
 
             <div class="card">
@@ -232,22 +247,32 @@
 
             <div class="card">
                 <div class="card-meta">
-                    <span>Coming Soon</span>
-                    <span class="status-badge status-demo">Planned</span>
+                    <span>Live Website</span>
+                    <span class="status-badge status-live">Deployed</span>
                 </div>
-                <h2>Landing Page Mockup</h2>
-                <p>Study information page for prospect outreach and participant onboarding. Will include study overview, timeline, and participation benefits.</p>
-                <a href="#" class="btn btn-secondary" onclick="alert('Coming soon!')">Preview Soon</a>
+                <h2>Landing Page (Live)</h2>
+                <p>Professional study information page deployed on Cloudflare. Features DAFCG branding, study overview, participation benefits, and call-to-action for prospect conversion.</p>
+                <a href="https://benchmark-2026-landing.pages.dev/" class="btn btn-accent" target="_blank">Visit Live Site</a>
             </div>
 
             <div class="card">
                 <div class="card-meta">
-                    <span>Coming Soon</span>
-                    <span class="status-badge status-demo">Planned</span>
+                    <span>Project Timeline</span>
+                    <span class="status-badge status-live">Interactive</span>
                 </div>
-                <h2>Report Dashboard Demo</h2>
-                <p>Interactive dashboard showing how participants will receive their benchmarking results with peer comparisons and industry insights.</p>
-                <a href="#" class="btn btn-secondary" onclick="alert('Coming soon!')">Preview Soon</a>
+                <h2>Gantt Chart & Timeline</h2>
+                <p>Interactive project timeline showing all 8 phases from Foundation through Report Sales. Includes dependencies, milestones, resource allocation, and critical success metrics.</p>
+                <a href="project-gantt.html" class="btn btn-accent">View Project Timeline</a>
+            </div>
+
+            <div class="card">
+                <div class="card-meta">
+                    <span>Technical Architecture</span>
+                    <span class="status-badge status-live">Documentation</span>
+                </div>
+                <h2>Tech Stack & Process Flow</h2>
+                <p>Complete technical infrastructure visualization showing data flow from Typeform through BigQuery to report delivery. Includes security, compliance, and integration details.</p>
+                <a href="tech-stack-visual.html" class="btn btn-accent">View Architecture</a>
             </div>
         </div>
 

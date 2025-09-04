@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAFCG Benchmarking Project - Timeline & Gantt Chart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Cooper Hewitt';
+            src: url('./fonts/CooperHewitt-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #391892;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #212C40;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #F7F7F7;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 3px solid #18DD89;
+            padding-bottom: 30px;
+        }
+        
+        h1 {
+            font-family: 'Cooper Hewitt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 2.5em;
+            color: #391892;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #6A44AE;
+            font-weight: 500;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #39189215, #6A44AE15);
+            border-radius: 15px;
+        }
+
+        .meta-label {
+            font-size: 0.85em;
+            color: #6A44AE;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .meta-value {
+            font-size: 1.3em;
+            color: #391892;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .gantt-container {
+            margin-top: 40px;
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gantt-chart {
+            min-width: 1200px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .timeline-header {
+            display: grid;
+            grid-template-columns: 300px repeat(24, 1fr);
+            background: linear-gradient(135deg, #391892, #6A44AE);
+            color: white;
+            padding: 15px 0;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .phase-label-header {
+            padding: 15px 20px;
+            font-size: 1em;
+            font-weight: 700;
+            border-right: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .month-header {
+            text-align: center;
+            padding: 15px 5px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        
+        .month-label {
+            font-weight: 700;
+            font-size: 0.85em;
+            margin-bottom: 2px;
+        }
+        
+        .week-label {
+            font-size: 0.7em;
+            opacity: 0.8;
+        }
+        
+        .gantt-row {
+            display: grid;
+            grid-template-columns: 300px repeat(24, 1fr);
+            border-bottom: 1px solid #D1D2D2;
+            min-height: 80px;
+            align-items: center;
+        }
+        
+        .gantt-row:hover {
+            background: rgba(24, 221, 137, 0.05);
+        }
+        
+        .phase-label {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-right: 2px solid #D1D2D2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .phase-name {
+            font-weight: 700;
+            color: #391892;
+            font-size: 1.05em;
+            margin-bottom: 5px;
+        }
+        
+        .phase-details {
+            font-size: 0.8em;
+            color: #6A44AE;
+            line-height: 1.3;
+        }
+        
+        .phase-owner {
+            font-size: 0.75em;
+            color: #1A2431;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        
+        .timeline-cell {
+            position: relative;
+            height: 80px;
+            border-right: 1px solid #F7F7F7;
+        }
+        
+        .gantt-bar {
+            position: absolute;
+            height: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gantt-bar:hover {
+            transform: translateY(-50%) scale(1.02);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .phase-complete {
+            background: linear-gradient(135deg, #18DD89, #16c77a);
+        }
+        
+        .phase-ready {
+            background: linear-gradient(135deg, #391892, #6A44AE);
+        }
+        
+        .phase-planned {
+            background: linear-gradient(135deg, #A6B0B2, #D1D2D2);
+            color: #212C40;
+        }
+        
+        .phase-continuous {
+            background: linear-gradient(135deg, #6A44AE, #391892);
+            opacity: 0.8;
+        }
+        
+        .milestone {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #E53E3E;
+            transform: rotate(45deg);
+            top: 50%;
+            margin-top: -10px;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(229, 62, 62, 0.4);
+        }
+        
+        .milestone::after {
+            content: attr(data-label);
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-45deg);
+            background: #E53E3E;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.7em;
+            white-space: nowrap;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .milestone:hover::after {
+            display: block;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-bar {
+            width: 30px;
+            height: 15px;
+            border-radius: 8px;
+        }
+        
+        .legend-complete { background: linear-gradient(135deg, #18DD89, #16c77a); }
+        .legend-ready { background: linear-gradient(135deg, #391892, #6A44AE); }
+        .legend-planned { background: linear-gradient(135deg, #A6B0B2, #D1D2D2); }
+        .legend-continuous { background: linear-gradient(135deg, #6A44AE, #391892); }
+        
+        .legend-text {
+            font-size: 0.9em;
+            color: #212C40;
+            font-weight: 600;
+        }
+        
+        .phase-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #18DD89;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #391892;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #6A44AE;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .project-meta {
+                gap: 15px;
+            }
+            
+            .gantt-container {
+                margin: 20px -20px;
+                padding: 0 20px;
+            }
+            
+            .phase-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📅 DAFCG Project Timeline & Gantt Chart</h1>
+            <div class="subtitle">Complete project roadmap from Foundation through Report Sales</div>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Duration</span>
+                    <span class="meta-value">6 Months</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Phases</span>
+                    <span class="meta-value">8 Total</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Timeline</span>
+                    <span class="meta-value">Aug 2025 - Jan 2026</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Target</span>
+                    <span class="meta-value">100 Participants</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="gantt-container">
+            <div class="gantt-chart">
+                <!-- Timeline Header -->
+                <div class="timeline-header">
+                    <div class="phase-label-header">Project Phases</div>
+                    <!-- Aug 2025 -->
+                    <div class="month-header"><div class="month-label">AUG</div><div class="week-label">W1</div></div>
+                    <div class="month-header"><div class="week-label">W2</div></div>
+                    <div class="month-header"><div class="week-label">W3</div></div>
+                    <div class="month-header"><div class="week-label">W4</div></div>
+                    <!-- Sep 2025 -->
+                    <div class="month-header"><div class="month-label">SEP</div><div class="week-label">W1</div></div>
+                    <div class="month-header"><div class="week-label">W2</div></div>
+                    <div class="month-header"><div class="week-label">W3</div></div>
+                    <div class="month-header"><div class="week-label">W4</div></div>
+                    <!-- Oct 2025 -->
+                    <div class="month-header"><div class="month-label">OCT</div><div class="week-label">W1</div></div>
+                    <div class="month-header"><div class="week-label">W2</div></div>
+                    <div class="month-header"><div class="week-label">W3</div></div>
+                    <div class="month-header"><div class="week-label">W4</div></div>
+                    <!-- Nov 2025 -->
+                    <div class="month-header"><div class="month-label">NOV</div><div class="week-label">W1</div></div>
+                    <div class="month-header"><div class="week-label">W2</div></div>
+                    <div class="month-header"><div class="week-label">W3</div></div>
+                    <div class="month-header"><div class="week-label">W4</div></div>
+                    <!-- Dec 2025 -->
+                    <div class="month-header"><div class="month-label">DEC</div><div class="week-label">W1</div></div>
+                    <div class="month-header"><div class="week-label">W2</div></div>
+                    <div class="month-header"><div class="week-label">W3</div></div>
+                    <div class="month-header"><div class="week-label">W4</div></div>
+                    <!-- Jan 2026 -->
+                    <div class="month-header"><div class="month-label">JAN</div><div class="week-label">W1</div></div>
+                    <div class="month-header"><div class="week-label">W2</div></div>
+                    <div class="month-header"><div class="week-label">W3</div></div>
+                    <div class="month-header"><div class="week-label">W4</div></div>
+                </div>
+                
+                <!-- Foundation Phase -->
+                <div class="gantt-row">
+                    <div class="phase-label">
+                        <div class="phase-name">00. Foundation</div>
+                        <div class="phase-details">Research & Strategy • 4 weeks</div>
+                        <div class="phase-owner">Lead: Lisa | Support: Mahluli</div>
+                    </div>
+                    <div class="timeline-cell">
+                        <div class="gantt-bar phase-complete" style="left: 0%; width: calc(400% - 10px);">Foundation Complete</div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                </div>
+                
+                <!-- Test Phase -->
+                <div class="gantt-row">
+                    <div class="phase-label">
+                        <div class="phase-name">01. Test Phase</div>
+                        <div class="phase-details">Message Testing • 3 weeks</div>
+                        <div class="phase-owner">Lead: Mahluli | Support: Lisa</div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell">
+                        <div class="gantt-bar phase-ready" style="left: 0%; width: calc(300% - 10px);">Test Phase Ready</div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                </div>
+                
+                <!-- Participant Acquisition -->
+                <div class="gantt-row">
+                    <div class="phase-label">
+                        <div class="phase-name">02. Participant Acquisition</div>
+                        <div class="phase-details">Outreach & Sign-ups • 8 weeks</div>
+                        <div class="phase-owner">Lead: Mahluli | Support: Lisa</div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell">
+                        <div class="gantt-bar phase-planned" style="left: 0%; width: calc(800% - 10px);">Participant Acquisition</div>
+                        <div class="milestone" style="right: 10px;" data-label="100 Participants"></div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                </div>
+                
+                <!-- Data Collection -->
+                <div class="gantt-row">
+                    <div class="phase-label">
+                        <div class="phase-name">03. Data Collection</div>
+                        <div class="phase-details">Survey & Data Validation • 6 weeks</div>
+                        <div class="phase-owner">Lead: Mahluli | Support: Lisa</div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell">
+                        <div class="gantt-bar phase-planned" style="left: 0%; width: calc(600% - 10px);">Data Collection</div>
+                        <div class="milestone" style="right: 10px;" data-label="90% Submissions"></div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                </div>
+                
+                <!-- Analysis & Report Generation -->
+                <div class="gantt-row">
+                    <div class="phase-label">
+                        <div class="phase-name">04. Analysis & Report Generation</div>
+                        <div class="phase-details">Data Analysis & Report Writing • 6 weeks</div>
+                        <div class="phase-owner">Lead: Lisa | Support: Mahluli</div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell">
+                        <div class="gantt-bar phase-planned" style="left: 0%; width: calc(600% - 10px);">Analysis & Report</div>
+                        <div class="milestone" style="right: 10px;" data-label="Report Complete"></div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                </div>
+                
+                <!-- Participant Delivery -->
+                <div class="gantt-row">
+                    <div class="phase-label">
+                        <div class="phase-name">05. Participant Delivery</div>
+                        <div class="phase-details">Report Distribution • 3 weeks</div>
+                        <div class="phase-owner">Lead: Mahluli | Support: Lisa</div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell">
+                        <div class="gantt-bar phase-planned" style="left: 0%; width: calc(300% - 10px);">Report Delivery</div>
+                        <div class="milestone" style="right: 10px;" data-label="Dec 31"></div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                </div>
+                
+                <!-- Report Sales -->
+                <div class="gantt-row">
+                    <div class="phase-label">
+                        <div class="phase-name">06. Report Sales</div>
+                        <div class="phase-details">Revenue Generation • 4 weeks</div>
+                        <div class="phase-owner">Lead: Mahluli | Support: Lisa</div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell">
+                        <div class="gantt-bar phase-planned" style="left: 0%; width: calc(400% - 10px);">Report Sales</div>
+                        <div class="milestone" style="right: 10px;" data-label="$75K+ Revenue"></div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                </div>
+                
+                <!-- Project Management -->
+                <div class="gantt-row">
+                    <div class="phase-label">
+                        <div class="phase-name">07. Project Management</div>
+                        <div class="phase-details">Continuous Coordination • 22 weeks</div>
+                        <div class="phase-owner">Lead: Lisa | Support: Mahluli</div>
+                    </div>
+                    <div class="timeline-cell">
+                        <div class="gantt-bar phase-continuous" style="left: 0%; width: calc(2000% - 10px);">Project Management (Continuous)</div>
+                    </div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                    <div class="timeline-cell"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-bar legend-complete"></div>
+                <span class="legend-text">Complete</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-bar legend-ready"></div>
+                <span class="legend-text">Ready to Start</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-bar legend-planned"></div>
+                <span class="legend-text">Planned</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-bar legend-continuous"></div>
+                <span class="legend-text">Continuous</span>
+            </div>
+            <div class="legend-item">
+                <div class="milestone" style="position: relative; transform: none; margin: 0 5px; top: 0;"></div>
+                <span class="legend-text">Key Milestones</span>
+            </div>
+        </div>
+        
+        <div class="phase-stats">
+            <div class="stat-card">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Phase Complete</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Phase Ready</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">5</div>
+                <div class="stat-label">Phases Planned</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">22</div>
+                <div class="stat-label">Total Weeks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$75K+</div>
+                <div class="stat-label">Revenue Target</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">Dec 31</div>
+                <div class="stat-label">Final Delivery</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
