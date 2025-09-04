@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAFCG Benchmarking Project - Roadmap by Pillars</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border-radius: 15px;
+        }
+        
+        .meta-label {
+            font-size: 0.85em;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .meta-value {
+            font-size: 1.3em;
+            color: #2d3748;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .roadmap-container {
+            position: relative;
+            margin-top: 40px;
+        }
+        
+        .timeline-header {
+            display: grid;
+            grid-template-columns: 200px repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+        
+        .month-label {
+            background: #4a5568;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .pillars {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .pillar {
+            display: grid;
+            grid-template-columns: 200px repeat(5, 1fr);
+            gap: 10px;
+            align-items: stretch;
+            position: relative;
+        }
+        
+        .pillar-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .pillar-number {
+            font-size: 2em;
+            font-weight: 900;
+            opacity: 0.3;
+            margin-bottom: 5px;
+        }
+        
+        .pillar-name {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .pillar-owner {
+            font-size: 0.85em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .phase-block {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .phase-block:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+        
+        .phase-block.active {
+            background: linear-gradient(135deg, #48bb7815, #4299e115);
+            border-color: #48bb78;
+        }
+        
+        .phase-block.completed {
+            background: linear-gradient(135deg, #48bb7810, #38a16910);
+            border-color: #38a169;
+            opacity: 0.85;
+        }
+        
+        .phase-title {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        
+        .phase-activities {
+            font-size: 0.8em;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+        
+        .phase-metric {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: 700;
+        }
+        
+        .phase-block.completed .phase-metric {
+            background: #48bb78;
+        }
+        
+        /* Spanning phases */
+        .span-2 { grid-column: span 2; }
+        .span-3 { grid-column: span 3; }
+        .span-4 { grid-column: span 4; }
+        .span-5 { grid-column: span 5; }
+        
+        .empty-cell {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .milestone-markers {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fbb03015, #ff574915);
+            border-radius: 15px;
+        }
+        
+        .milestone-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .milestones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        
+        .milestone {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #fed7d7;
+            position: relative;
+        }
+        
+        .milestone-date {
+            font-size: 1.1em;
+            font-weight: 800;
+            color: #e53e3e;
+            margin-bottom: 5px;
+        }
+        
+        .milestone-desc {
+            font-size: 0.9em;
+            color: #4a5568;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .legend-box.completed {
+            background: #48bb7820;
+            border-color: #48bb78;
+        }
+        
+        .legend-box.active {
+            background: #4299e120;
+            border-color: #4299e1;
+        }
+        
+        .legend-box.future {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+        
+        @media (max-width: 1200px) {
+            .timeline-header,
+            .pillar {
+                grid-template-columns: 150px repeat(5, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .timeline-header,
+            .pillar {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .phase-block {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 DAFCG Benchmarking Project Roadmap</h1>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Timeline</span>
+                    <span class="meta-value">Aug - Dec 2025</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Target</span>
+                    <span class="meta-value">100 Participants</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Deliverable</span>
+                    <span class="meta-value">Industry Report</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Team</span>
+                    <span class="meta-value">Mack (20hrs) + Lisa</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="roadmap-container">
+            <div class="timeline-header">
+                <div></div>
+                <div class="month-label">AUG (17-31)</div>
+                <div class="month-label">SEP</div>
+                <div class="month-label">OCT</div>
+                <div class="month-label">NOV</div>
+                <div class="month-label">DEC</div>
+            </div>
+            
+            <div class="pillars">
+                <!-- Pillar 1: Acquisition -->
+                <div class="pillar">
+                    <div class="pillar-header">
+                        <div class="pillar-number">1</div>
+                        <div class="pillar-name">ACQUISITION</div>
+                        <div class="pillar-owner">Lead: Mack</div>
+                    </div>
+                    
+                    <div class="phase-block active">
+                        <div class="phase-metric">205 test</div>
+                        <div class="phase-title">Infrastructure & Test</div>
+                        <div class="phase-activities">
+                            • Set up Active Campaign<br>
+                            • Deploy landing page<br>
+                            • Test with 205 prospects
+                        </div>
+                    </div>
+                    
+                    <div class="phase-block">
+                        <div class="phase-metric">+500</div>
+                        <div class="phase-title">Scale Outreach</div>
+                        <div class="phase-activities">
+                            • Add 500 new prospects<br>
+                            • LinkedIn campaigns<br>
+                            • Email sequences<br>
+                            • Partner channels
+                        </div>
+                    </div>
+                    
+                    <div class="phase-block span-2">
+                        <div class="phase-metric">1,500 total</div>
+                        <div class="phase-title">Full Scale Operations</div>
+                        <div class="phase-activities">
+                            • Add 800+ prospects<br>
+                            • Referral programs<br>
+                            • Speaking engagements<br>
+                            • Close remaining participants
+                        </div>
+                    </div>
+                    
+                    <div class="empty-cell"></div>
+                </div>
+                
+                <!-- Pillar 2: Gathering -->
+                <div class="pillar">
+                    <div class="pillar-header">
+                        <div class="pillar-number">2</div>
+                        <div class="pillar-name">GATHERING</div>
+                        <div class="pillar-owner">Lead: Mack + Lisa</div>
+                    </div>
+                    
+                    <div class="phase-block active">
+                        <div class="phase-metric">Survey ready</div>
+                        <div class="phase-title">Setup Typeform</div>
+                        <div class="phase-activities">
+                            • Create survey flow<br>
+                            • Test data collection<br>
+                            • Consent forms
+                        </div>
+                    </div>
+                    
+                    <div class="phase-block span-3">
+                        <div class="phase-metric">100 firms</div>
+                        <div class="phase-title">Active Data Collection</div>
+                        <div class="phase-activities">
+                            • Participant onboarding<br>
+                            • File submissions<br>
+                            • Follow-ups and support<br>
+                            • Data quality checks
+                        </div>
+                    </div>
+                    
+                    <div class="phase-block">
+                        <div class="phase-metric">Closed</div>
+                        <div class="phase-title">Final Collection</div>
+                        <div class="phase-activities">
+                            • Last submissions<br>
+                            • Data validation<br>
+                            • Thank participants
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pillar 3: Processing -->
+                <div class="pillar">
+                    <div class="pillar-header">
+                        <div class="pillar-number">3</div>
+                        <div class="pillar-name">PROCESSING</div>
+                        <div class="pillar-owner">Lead: Lisa</div>
+                    </div>
+                    
+                    <div class="phase-block active span-2">
+                        <div class="phase-metric">BigQuery</div>
+                        <div class="phase-title">Infrastructure Build</div>
+                        <div class="phase-activities">
+                            • Setup BigQuery pipeline<br>
+                            • Cloud Storage buckets<br>
+                            • Extraction scripts<br>
+                            • Test with friendlies
+                        </div>
+                    </div>
+                    
+                    <div class="phase-block span-2">
+                        <div class="phase-metric">Automated</div>
+                        <div class="phase-title">Production Processing</div>
+                        <div class="phase-activities">
+                            • Process incoming files<br>
+                            • Data normalization<br>
+                            • Quality assurance<br>
+                            • Build comparability framework
+                        </div>
+                    </div>
+                    
+                    <div class="phase-block">
+                        <div class="phase-metric">Complete</div>
+                        <div class="phase-title">Finalize Data</div>
+                        <div class="phase-activities">
+                            • Final validation<br>
+                            • Lock dataset<br>
+                            • Prepare for analysis
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pillar 4: Analysis -->
+                <div class="pillar">
+                    <div class="pillar-header">
+                        <div class="pillar-number">4</div>
+                        <div class="pillar-name">ANALYSIS</div>
+                        <div class="pillar-owner">Lead: Mack</div>
+                    </div>
+                    
+                    <div class="empty-cell"></div>
+                    <div class="empty-cell"></div>
+                    <div class="empty-cell"></div>
+                    
+                    <div class="phase-block span-2">
+                        <div class="phase-metric">Insights</div>
+                        <div class="phase-title">Deep Analysis</div>
+                        <div class="phase-activities">
+                            • Statistical analysis<br>
+                            • Industry benchmarks<br>
+                            • Pattern identification<br>
+                            • Case studies<br>
+                            • Key insights extraction
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pillar 5: Reporting -->
+                <div class="pillar">
+                    <div class="pillar-header">
+                        <div class="pillar-number">5</div>
+                        <div class="pillar-name">REPORTING</div>
+                        <div class="pillar-owner">Lead: Mack</div>
+                    </div>
+                    
+                    <div class="empty-cell"></div>
+                    <div class="empty-cell"></div>
+                    <div class="empty-cell"></div>
+                    <div class="empty-cell"></div>
+                    
+                    <div class="phase-block">
+                        <div class="phase-metric">Dec 31</div>
+                        <div class="phase-title">Report Creation</div>
+                        <div class="phase-activities">
+                            • Write full report<br>
+                            • Create visualizations<br>
+                            • Executive summary<br>
+                            • Distribution
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="milestone-markers">
+            <div class="milestone-title">🚨 Critical Milestones</div>
+            <div class="milestones-grid">
+                <div class="milestone">
+                    <div class="milestone-date">Aug 18</div>
+                    <div class="milestone-desc">Mack Returns</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">Aug 25</div>
+                    <div class="milestone-desc">Infrastructure Ready</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">Aug 31</div>
+                    <div class="milestone-desc">Test Complete (10-15)</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">Sep 15</div>
+                    <div class="milestone-desc">30 Participants</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">Sep 30</div>
+                    <div class="milestone-desc">60 Participants</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">Oct 31</div>
+                    <div class="milestone-desc">100 Participants</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">Nov 30</div>
+                    <div class="milestone-desc">Analysis Complete</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">Dec 31</div>
+                    <div class="milestone-desc">Report Delivered</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box completed"></div>
+                <span>Completed</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box active"></div>
+                <span>Active/Current</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box future"></div>
+                <span>Future</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
